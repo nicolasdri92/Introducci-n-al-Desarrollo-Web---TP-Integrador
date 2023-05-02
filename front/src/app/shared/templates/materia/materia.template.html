@@ -1,0 +1,66 @@
+<div class="wrapper-template">
+  <h3 mat-dialog-title>Nueva Materia</h3>
+
+  <form [formGroup]="materiaForm">
+    <div mat-dialog-content class="dialog-content">
+      <mat-form-field class="n-nombre">
+        <mat-label>Nombre de la asignatura </mat-label>
+        <input matInput formControlName="nombre" required="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-regimen">
+        <mat-label>Regimen </mat-label>
+        <mat-select
+          [value]="data?.regimen"
+          formControlName="regimen"
+          required="true"
+        >
+          <mat-option [value]="0">Anual</mat-option>
+          <mat-option [value]="1">Primer Cuatrimestre</mat-option>
+          <mat-option [value]="2">Segundo Cuatrimestre</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="n-hora">
+        <mat-label>Horas semanales </mat-label>
+        <input matInput formControlName="hora" required="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-anio">
+        <mat-label>Año </mat-label>
+        <mat-select [value]="data?.anio" formControlName="anio" required="true">
+          <mat-option [value]="1">1</mat-option>
+          <mat-option [value]="2">2</mat-option>
+          <mat-option [value]="3">3</mat-option>
+          <mat-option [value]="4">4</mat-option>
+          <mat-option [value]="5">5</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-carrera">
+        <mat-label>Carrera </mat-label>
+        <mat-select
+          [value]="data?.carrera"
+          formControlName="carrera"
+          required="true"
+        >
+          <mat-option *ngFor="let carrera of carreras" [value]="carrera._id">
+            {{ carrera.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-button
+        [mat-dialog-close]="materiaForm.value"
+        cdkFocusInitial
+        [disabled]="!materiaForm.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,60 @@
+<div class="wrapper-template">
+  <h3 mat-dialog-title>Nueva Carrera</h3>
+
+  <form [formGroup]="carreraForm">
+    <div mat-dialog-content class="dialog-content">
+      <mat-form-field class="n-nombre">
+        <mat-label>Nombre </mat-label>
+        <input matInput formControlName="nombre" required="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-tipo">
+        <mat-label>Tipo </mat-label>
+        <mat-select [value]="_data?.tipo" formControlName="tipo" required="true">
+          <mat-option [value]="0">Universitaria de Pre-Grado</mat-option>
+          <mat-option [value]="1">Universitaria de Grado</mat-option>
+          <mat-option [value]="2">Universitaria de Pos-Grado</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-modalidad">
+        <mat-label>Modalidad </mat-label>
+        <mat-select
+          [value]="_data?.modalidad"
+          formControlName="modalidad"
+          required="true"
+        >
+          <mat-option [value]="true">Presencial</mat-option>
+          <mat-option [value]="false">A distancia</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-duracion">
+        <mat-label>Duración </mat-label>
+        <mat-select
+          [value]="_data?.duracion"
+          formControlName="duracion"
+          required="true"
+        >
+          <mat-option [value]="1">1</mat-option>
+          <mat-option [value]="2">2</mat-option>
+          <mat-option [value]="3">3</mat-option>
+          <mat-option [value]="4">4</mat-option>
+          <mat-option [value]="5">5</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-button
+        [mat-dialog-close]="carreraForm.value"
+        cdkFocusInitial
+        [disabled]="!carreraForm.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

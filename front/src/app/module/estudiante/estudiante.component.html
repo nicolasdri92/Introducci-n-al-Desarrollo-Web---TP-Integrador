@@ -1,0 +1,141 @@
+<header [title]="title"></header>
+
+<div class="container-carrera">
+  <div class="wrap-title">
+    <h3>Lista de estudiantes</h3>
+  </div>
+
+  <div class="wrap-filtro">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Filtros </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="mat-expansion-panel-content">
+        <mat-form-field appearance="fill" class="e-materia">
+          <mat-label>Materia</mat-label>
+          <mat-select [(ngModel)]="materiaModel">
+            <mat-option *ngFor="let materia of materias" [value]="materia._id">
+              {{ materia.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="e-regimen">
+          <mat-label>Regimen</mat-label>
+          <mat-select [(ngModel)]="regimenModel">
+            <mat-option [value]="0">Anual</mat-option>
+            <mat-option [value]="1">Primer Cuatrimestre</mat-option>
+            <mat-option [value]="2">Segundo Cuatrimestre</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="onNoClick()">
+          Limpiar
+        </button>
+        <button mat-button color="primary" (click)="onSubmit()">Aplicar</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </div>
+
+  <div class="wrap-menu">
+    <div class="menu-left">
+      <button class="raised" (click)="addEstudiante()" value="nuevo">
+        Nuevo
+      </button>
+      <button
+        [ngClass]="selection.selected.length == 1 ? 'raised' : 'disabled'"
+        (click)="editEstudiante()"
+      >
+        Editar
+      </button>
+      <button
+        [ngClass]="selection.selected.length > 0 ? 'raised' : 'disabled'"
+        (click)="deleteEstudiante()"
+      >
+        Eliminar
+      </button>
+    </div>
+
+    <div class="menu-right">
+      <input
+        class="wrapper-search"
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Buscar"
+      />
+    </div>
+  </div>
+
+  <!-- Lista de Estudiantes -->
+  <div class="wrap-content">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef>Documento de Identidad</th>
+        <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef>Apellido</th>
+        <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha | date : "dd/MM/YYYY" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nacionalidad">
+        <th mat-header-cell *matHeaderCellDef>Nacionalidad</th>
+        <td mat-cell *matCellDef="let element">{{ element.nacionalidad }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Correo Electronico</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef>Celular</th>
+        <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  >
+  </mat-paginator>
+</div>
