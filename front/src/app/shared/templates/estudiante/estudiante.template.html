@@ -1,0 +1,76 @@
+<div class="wrapper-template">
+  <h3 mat-dialog-title>Nuevo estudiante</h3>
+
+  <form [formGroup]="estudianteForm">
+    <div mat-dialog-content class="dialog-content">
+      <mat-form-field class="n-dni">
+        <mat-label>Número de documento </mat-label>
+        <input matInput formControlName="dni" required="true" />
+      </mat-form-field>
+
+      <mat-form-field class="n-apellido">
+        <mat-label>Apellido </mat-label>
+        <input matInput formControlName="apellido" required="true" />
+      </mat-form-field>
+
+      <mat-form-field class="n-nombre">
+        <mat-label>Nombre </mat-label>
+        <input matInput formControlName="nombre" required="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-fecha">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="fecha"
+          required="true"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-nacionalidad">
+        <mat-label>Nacionalidad </mat-label>
+        <mat-select formControlName="nacionalidad" required="true">
+          <mat-option value="argentina">Argentina</mat-option>
+          <mat-option value="uruguay">Uruguay</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="n-telefono">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telefono" />
+      </mat-form-field>
+
+      <mat-form-field class="n-email">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="n-materia">
+        <mat-label>Materias </mat-label>
+        <mat-select formControlName="materia" [multiple]="true">
+          <mat-option *ngFor="let materia of materias" [value]="materia._id">
+            {{ materia.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-button
+        [mat-dialog-close]="estudianteForm.value"
+        cdkFocusInitial
+        [disabled]="!estudianteForm.valid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

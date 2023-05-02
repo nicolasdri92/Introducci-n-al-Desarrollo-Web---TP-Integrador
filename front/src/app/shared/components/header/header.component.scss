@@ -1,0 +1,17 @@
+.wrap-header {
+  background-color: #212f3d;
+  height: 180px;
+  .wrapper-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .title-header {
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      font-size: 36px;
+      color: #fff;
+    }
+  }
+}

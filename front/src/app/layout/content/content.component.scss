@@ -1,0 +1,43 @@
+.wrap_content {
+  height: 100vh;
+  .button_home {
+    width: 180px;
+    height: 40px;
+    display: flex;
+    position: absolute;
+    top: 30px;
+    z-index: 1;
+    cursor: pointer;
+    .wrapper_icon {
+      width: 40px;
+      height: 40px;
+      background-color: #046eb5;
+      mat-icon {
+        color: #fff;
+        margin: auto;
+        display: grid;
+        align-items: center;
+        height: 100%;
+      }
+    }
+    .wrapper_text {
+      background-color: #080a0d;
+      height: 100%;
+      width: 140px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      span {
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

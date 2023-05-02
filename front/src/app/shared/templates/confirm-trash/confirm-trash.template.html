@@ -1,0 +1,12 @@
+<div class="wrapper-template">
+  <h3 mat-dialog-title>Eliminar</h3>
+  <div mat-dialog-content class="dialog-content">
+    <mat-label>¿Desea eliminar los siguientes items?</mat-label>
+    <p *ngFor="let item of data">- {{ item.nombre }}</p>
+  </div>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Eliminar</button>
+  </div>
+</div>

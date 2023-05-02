@@ -1,0 +1,37 @@
+.wrapper-template {
+  padding: 0 20px;
+  .dialog-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    column-gap: 30px;
+
+    .n.dni {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .n-apellido {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .n-nombre {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .n-fecha {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .n-nacionalidad {
+      grid-area: 3 / 1 / 4 / 2;
+    }
+    .n-telefono {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+    .n-email {
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    .n-materia {
+      grid-area: 5 / 1 / 6 / 3;
+    }
+  }
+  .dialog-actions {
+    justify-content: end;
+  }
+}
